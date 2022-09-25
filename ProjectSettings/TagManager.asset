@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: background
+    uniqueID: 4110154231
+    locked: 0
+  - name: platforms
+    uniqueID: 1354646579
+    locked: 0
+  - name: PickUps
+    uniqueID: 4100799333
+    locked: 0
+  - name: Enemies
+    uniqueID: 3045211821
+    locked: 0
+  - name: player
+    uniqueID: 3256319517
+    locked: 0

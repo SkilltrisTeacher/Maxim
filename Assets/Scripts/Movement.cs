@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private float speed = 2f;
+    [SerializeField] private float speed = 10f;
     private Rigidbody2D playerRigidbody;
 
     private void Awake()
@@ -14,13 +14,13 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        float playerInput = Input.GetAxis('Horizontal');
-        Move(playerInput):
+        float playerInput = Input.GetAxis("Horizontal");
+        Move(playerInput);
     }
 
     private void Move(float direction)
     {
-        playerRigidbody.velocity = new Vector2(direction * speed, 0f);
+        playerRigidbody.velocity = new Vector2(direction * speed, playerRigidbody.velocity.y);
     }
     
 }
