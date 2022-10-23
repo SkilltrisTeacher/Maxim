@@ -9,12 +9,13 @@ public class Movement : MonoBehaviour
     [SerializeField] private KeyCode JumpButton = KeyCode.Space;
     private Rigidbody2D playerRigidbody;
     private Animator playerAnimator;
-    private bool SpriteFlip;
+    private SpriteRenderer playerSR;
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        playerSR = GetComponet<SpriteRenderer>();
     }
 
     private void Update()
@@ -30,14 +31,7 @@ public class Movement : MonoBehaviour
 
     private void Move(float direction)
     {
-        if (direction !=0)
-        {
-            playerAnimator.SetBool("Run", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("Run", false);
-        }
+        playerAnimator.SetBool("Run", direction != 0);
         playerRigidbody.velocity = new Vector2(direction * speed, playerRigidbody.velocity.y);
     }
 
@@ -49,7 +43,14 @@ public class Movement : MonoBehaviour
 
     private void Flip(float direction)
     {
-        
+        if(direction > 0)
+        {
+            playerSR.flipX = false;
+        }
+        if(direction < 0)
+        {
+            playerSR.flipX = true;
+        }
     }
 
 }
