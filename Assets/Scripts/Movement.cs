@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -7,15 +5,20 @@ public class Movement : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float JumpForce = 10f;
     [SerializeField] private KeyCode JumpButton = KeyCode.Space;
+    [SerializeField] private Collider2D feetCollider;
+    [SerializeField] private string groundLayer = "Ground";
+
     private Rigidbody2D playerRigidbody;
     private Animator playerAnimator;
     private SpriteRenderer playerSR;
+    private bool isGrounded;
+
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        playerSR = GetComponet<SpriteRenderer>();
+        playerSR = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -23,7 +26,8 @@ public class Movement : MonoBehaviour
         float playerInput = Input.GetAxis("Horizontal");
         Move(playerInput);
         Flip(playerInput);
-        if (Input.GetKeyDown(JumpButton))
+        isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask(groundLayer));
+        if (Input.GetKeyDown(JumpButton)&& isGrounded)
         {
             Jump();
         }
@@ -43,11 +47,11 @@ public class Movement : MonoBehaviour
 
     private void Flip(float direction)
     {
-        if(direction > 0)
+        if (direction > 0)
         {
             playerSR.flipX = false;
         }
-        if(direction < 0)
+        if (direction < 0)
         {
             playerSR.flipX = true;
         }
